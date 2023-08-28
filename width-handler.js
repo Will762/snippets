@@ -5,6 +5,7 @@
 // TO DO: make this accomodate more breakpoints
 // ====================================================
 
+
 let windowWidth = $(window).width();
 
 (function() {
@@ -21,10 +22,11 @@ let windowWidth = $(window).width();
 
 			this.timeoutID = setTimeout(() => {
 				const newWindowWidth = $(window).width();
+				console.log(newWindowWidth)
 				if ((windowWidth < thresholdWidth) && newWindowWidth >= thresholdWidth) {
-					document.dispatchEvent(resizedToDesktop);
+					window.dispatchEvent(resizedToDesktop);
 				} else if ((windowWidth >= thresholdWidth) && newWindowWidth < thresholdWidth) {
-					document.dispatchEvent(resizedToMobile);
+					window.dispatchEvent(resizedToMobile);
 				}
 				windowWidth = newWindowWidth;
 				this.timeoutID = null;
@@ -34,3 +36,6 @@ let windowWidth = $(window).width();
 
 	$(window).resize(() => widthUpdater.start());
 }());
+
+$(window).on("resizedToMobile", (e) => console.log(e));
+$(window).on("resizedToDesktop", (e) => console.log(e));
