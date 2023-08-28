@@ -2,7 +2,7 @@
 // jQuery, IIFE, global width var
 // Threshold width-change events for desktop / mobile
 // Repeat speed controlled by setTimeout
-// TO DO: make this accomodate more breakpoints
+// "Binary" version - accomodates one breakpoint
 // ====================================================
 
 
@@ -22,7 +22,6 @@ let windowWidth = $(window).width();
 
 			this.timeoutID = setTimeout(() => {
 				const newWindowWidth = $(window).width();
-				console.log(newWindowWidth)
 				if ((windowWidth < thresholdWidth) && newWindowWidth >= thresholdWidth) {
 					window.dispatchEvent(resizedToDesktop);
 				} else if ((windowWidth >= thresholdWidth) && newWindowWidth < thresholdWidth) {
@@ -37,5 +36,5 @@ let windowWidth = $(window).width();
 	$(window).resize(() => widthUpdater.start());
 }());
 
-$(window).on("resizedToMobile", (e) => console.log(e));
-$(window).on("resizedToDesktop", (e) => console.log(e));
+$(window).on("resizedToMobile", () => console.log(windowWidth));
+$(window).on("resizedToDesktop", () => console.log(windowWidth));
